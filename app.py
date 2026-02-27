@@ -8,7 +8,7 @@ app = Flask(__name__, static_folder='static', static_url_path='/static')
 CORS(app)
 
 DB_PATH = os.environ.get('DB_PATH', os.path.join(
-    '/data' if os.path.exists('/data') else os.path.dirname(__file__), 
+    '/data' if os.path.exists('/data') else os.path.dirname(__file__),
     'finance.db'
 ))
 
@@ -62,7 +62,7 @@ def init_db():
     conn.commit()
     conn.close()
 
-# Serve the PWA
+# ---- SERVE PWA FILES ----
 @app.route('/')
 def index():
     return send_from_directory('.', 'index.html')
@@ -74,6 +74,14 @@ def manifest():
 @app.route('/sw.js')
 def service_worker():
     return send_from_directory('.', 'sw.js')
+
+@app.route('/icon-192.png')
+def icon192():
+    return send_from_directory('.', 'icon-192.png')
+
+@app.route('/icon-512.png')
+def icon512():
+    return send_from_directory('.', 'icon-512.png')
 
 # ---- TRANSACTIONS ----
 @app.route('/api/transactions', methods=['GET'])
