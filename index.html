@@ -142,7 +142,7 @@
 const { useState, useEffect, useCallback, useRef } = React;
 
 // Auto-detect API URL
-const API = '';  // same origin (Flask serves both frontend and API)
+const API = window.location.origin.includes('localhost') ? 'http://localhost:5000' : window.location.origin;
 
 const fmt = v => new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(v||0);
 const fmtDate = d => d ? new Date(d+'T12:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'}) : '';
